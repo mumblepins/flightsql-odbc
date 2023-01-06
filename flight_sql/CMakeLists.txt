@@ -123,13 +123,9 @@ ExternalProject_Add(ApacheArrow
   CMAKE_ARGS ${ARROW_CMAKE_ARGS})
 
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/ApacheArrow-prefix/src/ApacheArrow-install/include)
-IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-  set(ARROW_LIB_DIR lib64)
-else()
-  set(ARROW_LIB_DIR lib)
-endif()
-link_directories(${CMAKE_CURRENT_BINARY_DIR}/ApacheArrow-prefix/src/ApacheArrow-install/${ARROW_LIB_DIR})
 
+link_directories(${CMAKE_CURRENT_BINARY_DIR}/ApacheArrow-prefix/src/ApacheArrow-install/lib)
+link_directories(${CMAKE_CURRENT_BINARY_DIR}/ApacheArrow-prefix/src/ApacheArrow-install/lib64)
 if (MSVC)
   # the following definitions stop arrow from using __declspec when staticly linking and will break on windows without them
   add_compile_definitions(ARROW_STATIC ARROW_FLIGHT_STATIC)
